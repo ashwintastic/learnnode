@@ -8,7 +8,7 @@ const  routes = require('./api/routes/route');
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/myCab', {
+mongoose.connect('mongodb://localhost:27017/myCab', {
   useMongoClient: true
   /* other options */
 });

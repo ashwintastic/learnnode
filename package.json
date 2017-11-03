@@ -5,18 +5,21 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js --exec babel-node --presets es2015  "
+    "start": "babel-watch server.js"
   },
   "author": "ashwini",
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "^6.26.0",
+    "async": "^2.5.0",
+    "babel-core": "^6.26.0",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-node6": "^11.0.0",
+    "babel-watch": "^2.0.7",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
-    "express": "^4.15.5",
-    "mongoose": "^4.11.13",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.6",
     "morgan": "^1.9.0"
   },
   "devDependencies": {

@@ -3,18 +3,15 @@ import bcrypt from 'bcrypt';
 const saltRounds = 5;
 class UserHelper {
 
-  create_user(userinfo){
-    var user = new User(userinfo);
-    console.log("==================>>>", user)
-    bcrypt.hash(userinfo.password, saltRounds, function(err, hash) {
-      user.password = hash;
-      user.save(function(err, task) {
-        if (err)
-          return err;
-        return user;
-      });
-    });
-  }
+    create_user(userinfo){
+        var user = new User(userinfo);
+        console.log("==================>>>", user)
+        return bcrypt.hash(userinfo.password, saltRounds).then(function(hash, err) {
+            user.password = hash;
+             return user.save()
+             //return us
+        })
+    }
 }
 
 
