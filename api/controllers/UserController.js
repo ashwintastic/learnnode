@@ -5,16 +5,15 @@ import UserHelper from '../helper/UserHelper'
 
 class UserController {
 
-  get_all_tasks(req, res){
-    console.log("get all user");
-    let s = {user: "hey m called.."}
-  }
+    async get_all_user(req, res){
+        let allUsers = await UserHelper.get_all_user();
+        res.send(allUsers)
+    }
 
     async create_user(req, res){
-    var respone = await UserHelper.create_user(req.body);
-    console.log("in controller ", respone)
-      res.send(respone)
-  }
+        var respone =  await UserHelper.create_user(req.body)
+        res.send(respone)
+    }
 }
 
 

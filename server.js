@@ -13,8 +13,12 @@ mongoose.connect('mongodb://localhost:27017/myCab', {
   /* other options */
 });
 
+var normalizedPath = require("path").join(__dirname, "api/model/");
 
-require('./api/model/UserModel');
+require("fs").readdirSync(normalizedPath).forEach(function(file) {
+    require("./api/model/" + file);
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
