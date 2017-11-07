@@ -23,4 +23,6 @@ module.exports = function(app) {
 
     app.route('/login')
         .post(auth.userAuthentication);
+
+    app.post('/validatoken', auth.validateJwt)
 };

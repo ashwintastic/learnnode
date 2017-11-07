@@ -16,6 +16,10 @@ const AuthRoutesMap = [
     {
         path: '/login',
         authRequired: false
+    },
+    {
+        path: '/validatoken',
+        authRequired: false
     }
 ];
 

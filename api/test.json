@@ -5,3 +5,9 @@
     "isDriver": true,
     "password": "1234"
 }
+
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjo5MTQ1Nzg2MzMsImlhdCI6MTUxMDA2Mjc1MX0.kbuQf0B1diYE2BgkRUbeD4KWtZYMPy_eL4YGp8Prb8o",
+    "isValidpass": true
+}
