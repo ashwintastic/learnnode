@@ -8,6 +8,8 @@ const GlobalHelper = new function(arg){
      });
      return tempJson;
     }
+
+
 };
 
 export default GlobalHelper;
