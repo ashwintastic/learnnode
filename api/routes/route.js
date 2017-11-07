@@ -1,14 +1,16 @@
 import user from '../controllers/UserController';
 import vehicle from '../controllers/VehicleController';
 import auth from '../controllers/AuthenticationController';
-import authMiddleWare from '../utils/authMiddleWare';
+import ConfigObj from '../config'
 import Authentication from '../utils/authMiddleWare'
 module.exports = function(app) {
 
-    app.all('*', function (req, res, next) {
-        console.log('before all routes');
-        Authentication.checkIfValidRequest(req,res, next)
-    });
+    if (ConfigObj.secureApiEnd) {
+        app.all('*', function (req, res, next) {
+            console.log('before all routes');
+            Authentication.checkIfValidRequest(req, res, next)
+        });
+    }
 
     app.route('/user')
         .get( user.get_all_user)

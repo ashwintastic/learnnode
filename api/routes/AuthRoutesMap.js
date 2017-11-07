@@ -6,7 +6,7 @@ const AuthRoutesMap = [
     },
     {
         path: '/registerDriver',
-        authRequired:true
+        authRequired: false
     },
     {
         path: '/getDriverVehicle',

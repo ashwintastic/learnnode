@@ -1,16 +1,16 @@
+import User from '../model/UserModel';
 
 class UserAuthHelperHelper {
 
-    async create_user(userinfo){
-        let user = new User(userinfo);
-        let hash = await bcrypt.hash(userinfo.password, saltRounds);
-        user.password = hash;
-        return user.save().then( function(usr){
-            return usr;
-        })
-            .catch(function(e){
-                return e
-            })
+    async verify_user(userinfo){
+        let password = userinfo.password;
+        let isValidUser = await User.findOne({phone:userinfo.phone});
+        if(isValidUser == null){ // user does not exist
+            return false
+        }
+        else { // user exist
+            console.log("oooooooooooooooooooooo", isValidUser)
+        }
 
     }
 

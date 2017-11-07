@@ -1,13 +1,14 @@
 import AuthRoutesMap from '../routes/AuthRoutesMap';
+import jwt from  'jsonwebtoken';
+import ConfigObj from '../config/'
 
-const Authentication = new function(req){
+class Authentication {
 
-    this.checkIfValidRequest = function(req, res, next){
+    checkIfValidRequest (req, res, next){
         const requestedUrl = req.url.match('^[^?]*')[0] ;
         for(let r of AuthRoutesMap) {
-
             if (requestedUrl === r.path && r.authRequired) {
-                let isValidRequest = this.jsonWebTokenValidation();
+                let isValidRequest = this.jsonWebTokenValidation(req);
                 isValidRequest ? next(): res.send({message: "Unauthorised request", status: 401});
                 break;
             }
@@ -21,10 +22,14 @@ const Authentication = new function(req){
 
     };
 
-    this.jsonWebTokenValidation = function () {
+     jsonWebTokenValidation (req) {
+      jwt.sign({ foo: 'bar' }, ConfigObj.secretKey,  function(err, token) {
+          console.log(token, "***********************************", err);
+      });
+
         return false;
     }
 };
 
 
-export default Authentication;
+export default  new Authentication();
