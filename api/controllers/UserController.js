@@ -13,6 +13,12 @@ class UserController {
         var respone =  await UserHelper.create_user(req.body)
         res.send(respone)
     }
+
+    // using joins mainly for automated report purpose
+    async get_users_with__vehicles(req, res){
+        var response = await UserHelper.get_users_with__vehicles();
+        res.send(response)
+    }
 }
 
 

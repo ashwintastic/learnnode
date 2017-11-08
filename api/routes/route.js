@@ -25,4 +25,6 @@ module.exports = function(app) {
         .post(auth.userAuthentication);
 
     app.post('/validatoken', auth.validateJwt)
+
+    app.get('/all_users_vehicles', user.get_users_with__vehicles)
 };

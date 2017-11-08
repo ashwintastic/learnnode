@@ -1,5 +1,5 @@
 const ConfigObj = {
-    secureApiEnd: true,
+    secureApiEnd: false,
     secretKey: 'chunne chunne'
 
 };
