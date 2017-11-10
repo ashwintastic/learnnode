@@ -44,9 +44,10 @@ class UserHelper {
                     }
             }
         ]).exec().then((results)=>{
-            console.log("users_with_vehiclesusers_with_vehicles",GlobalHelper.arrayToObj(results))
             return GlobalHelper.arrayToObj(results)
-        })
+        }).catch((err)=>{
+            return {message: "some error occured mongo error", err}
+        } )
     }
 }
 

@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const app        = express();
 const port       = 8000;
 const routes    = require('./api/routes/route');
-
+const fileUpload = require('express-fileupload');
+export const appRoot = __dirname;
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/myCab', {
@@ -20,8 +21,9 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
     require("./api/model/" + file);
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
+
 
 routes(app);
 

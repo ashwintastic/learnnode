@@ -1,5 +1,4 @@
-'use strict';
-import mongoose from 'mongoose';
+
 import UserHelper from '../helper/UserHelper'
 
 class UserController {

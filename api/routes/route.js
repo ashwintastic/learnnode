@@ -2,7 +2,12 @@ import user from '../controllers/UserController';
 import vehicle from '../controllers/VehicleController';
 import auth from '../controllers/AuthenticationController';
 import ConfigObj from '../config'
-import Authentication from '../utils/authMiddleWare'
+import Authentication from '../utils/authMiddleWare';
+var multer  = require('multer')
+var upload = multer();
+
+
+
 module.exports = function(app) {
 
     if (ConfigObj.secureApiEnd) {
@@ -16,8 +21,7 @@ module.exports = function(app) {
         .get( user.get_all_user)
         .post( user.create_user);
 
-    app.route('/registerDriver')
-        .post(vehicle.register_vehicle);
+    app.post('/registerDriver', upload.any() ,vehicle.register_vehicle);
 
     app.get('/getDriverVehicle', vehicle.get_user_vehicle);
 
