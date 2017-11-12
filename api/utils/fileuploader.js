@@ -5,11 +5,11 @@ const Promise = require('bluebird');
 
 class FileUploader {
 
-    async saveFileToDes(path , file, storeInternal = true){
+    async saveFileToDes(fileTosaveDir , file,  iCount, storeInternal = true){
         if (storeInternal) {
-            let filename = this.giveAnameToFile();
+            let filename = this.giveAnameToFile(iCount);
             return new Promise((resolve, reject) => {
-                fs.writeFile(GlobalConfig.imagePath + `${path}/${filename}`, file.buffer, 'binary', function (err) {
+                fs.writeFile(`${fileTosaveDir}/${filename}`, file.buffer, 'binary', function (err) {
                     if (err) reject(false);
                     else resolve(true)
                 })
@@ -20,29 +20,47 @@ class FileUploader {
     async saveAllFiles(path , files){
         let promises = [];
         const allImages = files.length;
-
-        for(let i=0; i< allImages; i++){
-            promises.push(this.saveFileToDes(path,files[i]));
+        // check Or make directory exist
+        //let userId = req.header('token')
+        let dirStatus = await this.makeDir(GlobalConfig.imagePath+path,  '9145780834');
+        let fileTosaveDir = GlobalConfig.imagePath+path + '/'+ '9145780834';
+        if (dirStatus) {
+            for (let i = 0; i < allImages; i++) {
+                console.log("=================================",files[i], i)
+                promises.push(this.saveFileToDes(fileTosaveDir, files[i], i));
+            }
+            Promise.all(promises)
+                .then(() => {
+                    return true
+                })
+                .catch((e) => {
+                    return false
+                });
         }
-        Promise.all(promises)
-            .then(() => {
-                return true
+        else{
+            return{message: "Error with directory creation"}
+        }
+    }
+
+    async makeDir(parentDirTree, newDir) {
+        parentDirTree = parentDirTree + '/';
+        return new Promise((resolve, reject) => {
+            mkdirp(`${parentDirTree+newDir}`, function (err) {
+                if (err) {
+                    console.error(err)
+                    reject(false)
+                }
+                else {
+                    console.log('pow!');
+                    resolve(true)
+                }
             })
-            .catch((e) => {
-                return false
-            });
+        })
     }
 
-    async makeDir(parentDir) {
-        mkdirp(GlobalConfig.imagePath+parentDir.then((dir)=>{
-            return {response: true, message: dir}
-        })).catch( (err) =>{
-            return {response: false, reason: err}
-        });
-    }
-
-    giveAnameToFile(){
-        return Date.now();
+    giveAnameToFile(c){
+        console.log('image count', c)
+        return c;
     }
 
 }
