@@ -61,8 +61,9 @@ class UserHelper {
                 let ifDirCreated = await FileUploader.makeDir(Config.imagePath + 'driversImages', userPhone);
 
                 let response = await FileUploader.saveImage(Config.imagePath+'driversImages/'+userPhone ,userImage);
-                console.log("====ifdircreated", ifDirCreated, userImage)
-                //user.profileImage =
+                console.log("====ifdircreated", ifDirCreated, user)
+                user.profileImage = Config.imagePath+'driversImages/'+userPhone + '/'+ 'hardcord'
+                user.save();
             }
         }
     }
