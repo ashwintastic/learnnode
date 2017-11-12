@@ -30,5 +30,7 @@ module.exports = function(app) {
 
     app.post('/validatoken', auth.validateJwt)
 
-    app.get('/all_users_vehicles', user.get_users_with__vehicles)
+    app.get('/all_users_vehicles', user.get_users_with__vehicles);
+
+    app.post('/save_user_image', upload.single('userImg') , user.save_driver_image)
 };

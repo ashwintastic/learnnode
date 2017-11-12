@@ -6,7 +6,8 @@ const UserSchema = new Schema({
   email: { type: String },
   password: { type: String, required: true},
   phone: {type: Number, required: true,  unique: true},
-  isDriver: {type: Boolean}
+  isDriver: {type: Boolean},
+  profileImage: {type: String}
 });
 
 const User = mongoose.model('User', UserSchema);

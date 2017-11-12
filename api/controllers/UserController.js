@@ -18,6 +18,10 @@ class UserController {
         var response = await UserHelper.get_users_with__vehicles();
         res.send(response)
     }
+
+    async save_driver_image(req, res){
+        let response = await UserHelper.save_driver_image(req)
+    }
 }
 
 

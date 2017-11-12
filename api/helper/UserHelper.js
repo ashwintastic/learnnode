@@ -2,7 +2,9 @@ import User from '../model/UserModel';
 import bcrypt from 'bcrypt';
 const saltRounds = 5;
 import mongoose, { Schema } from 'mongoose';
-import GlobalHelper from '../utils/globalHelpers'
+import GlobalHelper from '../utils/globalHelpers';
+import FileUploader from '../utils/fileuploader';
+import Config from '../config'
 class UserHelper {
 
     async create_user(userinfo){
@@ -48,6 +50,21 @@ class UserHelper {
         }).catch((err)=>{
             return {message: "some error occured mongo error", err}
         } )
+    }
+
+    async save_driver_image(userInfo){
+        let userPhone = 914578634; // TODO:: get user info from token in header
+        let user = await User.findOne({phone: userPhone});
+        if(user != null) {
+            let userImage = userInfo.hasOwnProperty('file') ? userInfo.file : null;
+            if (userImage != null) {
+                let ifDirCreated = await FileUploader.makeDir(Config.imagePath + 'driversImages', userPhone);
+
+                let response = await FileUploader.saveImage(Config.imagePath+'driversImages/'+userPhone ,userImage);
+                console.log("====ifdircreated", ifDirCreated, userImage)
+                //user.profileImage =
+            }
+        }
     }
 }
 

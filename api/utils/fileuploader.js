@@ -5,16 +5,20 @@ const Promise = require('bluebird');
 
 class FileUploader {
 
-    async saveFileToDes(fileTosaveDir , file,  iCount, storeInternal = true){
+    async saveFileToDes(fileTosaveDir , file, iCount, storeInternal = true){
         if (storeInternal) {
-            let filename = this.giveAnameToFile(iCount);
-            return new Promise((resolve, reject) => {
-                fs.writeFile(`${fileTosaveDir}/${filename}`, file.buffer, 'binary', function (err) {
-                    if (err) reject(false);
-                    else resolve(true)
-                })
-            })
+            this.saveImage(fileTosaveDir, file, iCount);
         }
+    }
+
+    async saveImage(fileTosaveDir,file, iCount=false){
+        let filename = file instanceof Array ? this.giveAnameToFile(iCount) : Date.now();
+        return new Promise((resolve, reject) => {
+            fs.writeFile(`${fileTosaveDir}/${filename}`, file.buffer, ['binary', 'w'],  function (err) {
+                if (err) reject(false);
+                else resolve(true)
+            })
+        })
     }
 
     async saveAllFiles(path , files){
@@ -26,7 +30,6 @@ class FileUploader {
         let fileTosaveDir = GlobalConfig.imagePath+path + '/'+ '9145780834';
         if (dirStatus) {
             for (let i = 0; i < allImages; i++) {
-                console.log("=================================",files[i], i)
                 promises.push(this.saveFileToDes(fileTosaveDir, files[i], i));
             }
             Promise.all(promises)
@@ -47,11 +50,11 @@ class FileUploader {
         return new Promise((resolve, reject) => {
             mkdirp(`${parentDirTree+newDir}`, function (err) {
                 if (err) {
-                    console.error(err)
+                    console.error(err);
                     reject(false)
                 }
                 else {
-                    console.log('pow!');
+                    console.log('directory created !!!!');
                     resolve(true)
                 }
             })
@@ -59,7 +62,6 @@ class FileUploader {
     }
 
     giveAnameToFile(c){
-        console.log('image count', c)
         return c;
     }
 
