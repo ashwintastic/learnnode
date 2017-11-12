@@ -4,16 +4,12 @@ class VehicleController {
 
     async register_vehicle(req, res){
         try {
-            console.log("---isisisisisisisi---------------------1b",)
-            let isFileSaved = await storage.saveFileToDes(req.files[0]);
-            console.log("---isisisisisisisi---------------------1ba",)
+            let allFiles = req.files;
+            let isFileSaved = await storage.saveAllFiles('vehicleDoc', allFiles);
             let response = await VehicleHelper.register_vehicle(req.body);
-            console.log("afetr await", response)
             res.send(response);
         }catch(err){
-            console.log("---isisisisisisisi---------------------2",);
-            res.send({"message": "some error occured"});
-            //return false
+            return false
         }
     }
 
