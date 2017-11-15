@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     if (ConfigObj.secureApiEnd) {
         app.all('*', function (req, res, next) {
-            console.log('before all routes');
+            console.log('-----------before all routes--------------');
             Authentication.checkIfValidRequest(req, res, next)
         });
     }

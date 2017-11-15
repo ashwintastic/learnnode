@@ -5,9 +5,10 @@ const bodyParser = require('body-parser');
 const app        = express();
 const port       = 8000;
 const routes    = require('./api/routes/route');
+import GlobalConfig from './api/config';
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/myCab', {
+mongoose.connect(GlobalConfig.mongoDb, {
   useMongoClient: true
   /* other options */
 });
