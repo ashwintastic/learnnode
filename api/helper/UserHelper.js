@@ -62,8 +62,9 @@ class UserHelper {
 
                 let response = await FileUploader.saveImage(Config.imagePath+'driversImages/'+userPhone ,userImage);
                 console.log("====ifdircreated", ifDirCreated, user)
-                user.profileImage = Config.imagePath+'driversImages/'+userPhone + '/'+ 'hardcord'
+                user.profileImage = Config.imagePath+'driversImages/'+userPhone + '/'+ 'ha454545rdcord'
                 user.save();
+                console.log("====ifdafterircreated", ifDirCreated, user)
             }
         }
     }

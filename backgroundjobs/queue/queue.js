@@ -1,4 +1,4 @@
-var kue = require('kue');
+import kue from 'kue';
 const queue = kue.createQueue();
 import Scheduler from '../scheduler/scheduler'
 class QueueGenerator {

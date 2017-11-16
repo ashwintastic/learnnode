@@ -16,7 +16,7 @@ If you dont want to type --presets node6 you can save it .babelrc file by:
 import MongoOplog from 'mongo-oplog';
 import QueueGenerator from '../queue/queue';
 
-const oplog = MongoOplog('mongodb://127.0.0.1:27017/local', { ns: 'mycab.users' })
+const oplog = MongoOplog('mongodb://127.0.0.1:27017/local')
 
 oplog.tail();
 
