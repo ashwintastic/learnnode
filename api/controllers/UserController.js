@@ -20,8 +20,8 @@ class UserController {
     }
 
     async save_driver_image(req, res){
-       // debugger
         let response = await UserHelper.save_driver_image(req)
+        res.send(response);
     }
 }
 

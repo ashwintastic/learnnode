@@ -1,0 +1,13 @@
+/*
+* npm install --save babel-cli babel-preset-node6
+and then
+
+./node_modules/babel-cli/bin/babel-node.js --presets node6 ./your_script.js
+If you dont want to type --presets node6 you can save it .babelrc file by:
+
+{
+  "presets": [
+    "node6"
+  ]
+}
+

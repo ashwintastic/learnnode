@@ -58,13 +58,16 @@ class UserHelper {
         if(user != null) {
             let userImage = userInfo.hasOwnProperty('file') ? userInfo.file : null;
             if (userImage != null) {
-                let ifDirCreated = await FileUploader.makeDir(Config.imagePath + 'driversImages', userPhone);
+                let ifDirCreated = await FileUploader.
+                makeDir(Config.imagePath + 'driversImages', userPhone);
+                let response = await FileUploader.
+                saveImage(Config.imagePath+'driversImages/'+userPhone ,userImage);
+                if (response.message){
+                    user.profileImage = Config.imagePath+'driversImages/'+userPhone + '/'+ response.imgName;
+                    console.log("====in if", ifDirCreated, user)
+                    return user.save();
+                }
 
-                let response = await FileUploader.saveImage(Config.imagePath+'driversImages/'+userPhone ,userImage);
-                console.log("====ifdircreated", ifDirCreated, user)
-                user.profileImage = Config.imagePath+'driversImages/'+userPhone + '/'+ 'ha454545rdcord'
-                user.save();
-                console.log("====ifdafterircreated", ifDirCreated, user)
             }
         }
     }

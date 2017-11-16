@@ -13,6 +13,8 @@ If you dont want to type --presets node6 you can save it .babelrc file by:
 
 * */
 
+
+import {SEND_VERIFICATION_MAIL} from '../jobs/constants';
 import MongoOplog from 'mongo-oplog';
 import QueueGenerator from '../queue/queue';
 
@@ -27,7 +29,7 @@ oplog.tail();
 
 oplog.on('insert', doc => {
     console.log("listening to event on users collections --insert");
-    QueueGenerator.listenToOplogListener(doc);
+    QueueGenerator.listenToOplogListener(doc, SEND_VERIFICATION_MAIL);
 });
 
 oplog.on('update', doc => {
