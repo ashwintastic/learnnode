@@ -4,11 +4,11 @@ import ConfigObj from '../config/'
 
 class Authentication {
 
-    checkIfValidRequest (req, res, next){
+   async checkIfValidRequest (req, res, next){
         const requestedUrl = req.url.match('^[^?]*')[0] ;
         for(let r of AuthRoutesMap) {
             if (requestedUrl === r.path && r.authRequired) {
-                let isValidRequest = this.validateUserJwt(req);
+                let isValidRequest = await this.validateUserJwt(req);
                 isValidRequest ? next(): res.send({message: "Unauthorised request", status: 401});
                 break;
             }
@@ -22,11 +22,16 @@ class Authentication {
 
     };
 
-    async validateUserJwt(token){
+    async validateUserJwt(info){
+        // TODO :: token = req.headres['token']
+        // as of now postman doesn't allow token header to be send so
+        //  i'm using hardcoded generated access-token
+        let token = info ; //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjo5MTQ1Nzg2MzMsImlhdCI6MTUxMjgxNDc1MX0.JF_7V0BoV1xioLlIRZ-CD4onlvlLmNUxhGwSwDZzK5w";
         try {
             var decoded = await jwt.verify(token, ConfigObj.secretKey);
             return decoded
         } catch(err) {
+            console.log("---------------------token ", err)
             return false
         }
 
