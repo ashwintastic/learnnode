@@ -18,7 +18,7 @@ import {SEND_VERIFICATION_MAIL} from '../jobs/constants';
 import MongoOplog from 'mongo-oplog';
 import QueueGenerator from '../queue/queue';
 
-const oplog = MongoOplog('mongodb://127.0.0.1:27017/local')
+const oplog = MongoOplog('mongodb://127.0.0.1:27017/local');
 
 oplog.tail();
 

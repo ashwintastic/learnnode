@@ -9,7 +9,7 @@ class UserController {
     }
 
     async create_user(req, res){
-        var respone =  await UserHelper.create_user(req.body)
+        var respone =  await UserHelper.create_user(req.body);
         res.send(respone)
     }
 
@@ -20,7 +20,7 @@ class UserController {
     }
 
     async save_driver_image(req, res){
-        let response = await UserHelper.save_driver_image(req)
+        let response = await UserHelper.save_driver_image(req);
         res.send(response);
     }
 }
