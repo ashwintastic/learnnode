@@ -9,14 +9,12 @@ class SubcriptionHelper{
         // TODO:: later get token from header sent by front-end
         let response = await auth.validateUserJwt( passengerInfo.token);
         let passenger = await Passenger.findOne({phone: response.user}); // passengerPhoneNumber = response.user;
-        console.log("================after passenger token", passenger)
         passenger.hasSubscribedAvehicle.push(passengerInfo.subscribed_vehicle);
         return passenger.save().then( (passenger) => {
-            console.log("saved--------------------")
             let subscribedVehicle = passenger.hasSubscribedAvehicle.pop()
-            return {message: `You are subcribed to ${subscribedVehicle.name}`}
+            return {message: `You are subcribed to ${subscribedVehicle.name} number is ${subscribedVehicle.vNumber}`}
         }).catch( (err)=>{
-            console.log("------------------", err);
+            return {message: `some error occured ${err}`}
         })
 
 

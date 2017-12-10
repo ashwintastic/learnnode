@@ -40,4 +40,6 @@ module.exports = function(app) {
     app.post('/passenger_subscribes_vehicle', passenger.passenger_subscribes_vehicle);
 
     app.post('/passengerlogin', auth.passengerLogin);
+    
+
 };
