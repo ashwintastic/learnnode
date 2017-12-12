@@ -10,14 +10,20 @@ const VehicleSchema = new Schema({
 });
 
 const PassengerSchema = new Schema({
-    firstName: { type: String, required: true },
-    lastName: { type: String , required: true},
-    password: { type: String, required: true},
-    phone: {type: Number, required: true,  unique: true},
-    profileImage: {type: String},
-    hasSubscribedAvehicle: [VehicleSchema]
-});
+        firstName: { type: String, required: true },
+        lastName: { type: String , required: true},
+        password: { type: String, required: true},
+        phone: {type: Number, required: true,  unique: true},
+        profileImage: {type: String},
+        hasSubscribedAvehicle: Schema.Types.Mixed
+    },
+
+
+    { minimize: false }
+
+);
 
 const Passenger = mongoose.model('Passenger', PassengerSchema);
 
 export default Passenger;
+
