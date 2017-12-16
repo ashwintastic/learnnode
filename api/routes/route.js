@@ -41,6 +41,6 @@ module.exports = function(app) {
     
     
     // report generation 
-    app.get('/vehicle_passenger_mapping', ReportGeneration.vehicle_passenger_mapping)
+    app.post('/vehicle_passenger_mapping', ReportGeneration.vehicle_passenger_mapping)
 
 };

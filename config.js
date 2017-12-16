@@ -1,3 +1,1 @@
-/**
- * Created by root on 27/9/17.
- */
+export const LIMIT= 5;

@@ -1,7 +1,8 @@
 
 import ReportHelper from '../helper/ReportHelper'
 class ReportGenerationController {
-    vehicle_passenger_mapping(req, res){
+    async vehicle_passenger_mapping(req, res){
+        let report = await ReportHelper.vehicle_passenger_mapping(req.body);
         
     }
 }
