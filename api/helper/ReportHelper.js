@@ -30,7 +30,7 @@ class ReportHelper {
             let pages = Math.ceil(count/limit);
 
             let result = u.slice(skipVal, skipVal+limit);
-            console.log("heu")
+
             return ({message: true, count, result,pages})
 
         }).catch( (error)=>{
