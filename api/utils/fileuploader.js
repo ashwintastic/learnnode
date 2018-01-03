@@ -13,11 +13,12 @@ class FileUploader {
 
     async saveImage(fileTosaveDir,file, iCount=false){
         let imgName = Date.now();
-        let filename = file instanceof Array ? this.giveAnameToFile(iCount) : imgName;
+        console.log("heheheheeh", file instanceof Array)
+        let filename = iCount
         return new Promise((resolve, reject) => {
             fs.writeFile(`${fileTosaveDir}/${filename}`, file.buffer, 'binary',  function (err) {
                 if (err) reject(false);
-                else resolve({message: true, imgName:imgName})
+                else resolve({message: true, imgName: iCount})
             })
         })
     }
@@ -62,9 +63,6 @@ class FileUploader {
         })
     }
 
-    giveAnameToFile(c){
-        return c;
-    }
 
 }
 

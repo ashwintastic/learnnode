@@ -24,7 +24,7 @@ module.exports = function(app) {
     app.route('/user')
         .get( user.get_all_user)
         .post( user.create_user);
-    app.post('/registerDriver', upload.any() ,vehicle.register_vehicle);
+    app.post('/registerDriver', upload.any(), vehicle.register_vehicle);
     app.get('/getDriverVehicle', vehicle.get_user_vehicle);
     app.route('/login')
         .post(auth.userAuthentication);
