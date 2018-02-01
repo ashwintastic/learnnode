@@ -5,10 +5,11 @@ import GlobalHelper from '../utils/globalHelpers'
 
 class VehicleHelper {
 
-    async register_vehicle(vehicleinfo){
-     let vehicle = new Vehicle(vehicleinfo);
+    async register_vehicle(vehicleinfo, docsPath){
+        let vehicle = new Vehicle(vehicleinfo);
+        vehicle.vehicleDocs = docsPath.path;
         return vehicle.save().then(function(v){
-         return v
+            return v
         }).catch(function(e){
             return e
         })

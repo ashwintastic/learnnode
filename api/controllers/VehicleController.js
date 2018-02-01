@@ -5,9 +5,13 @@ class VehicleController {
     async register_vehicle(req, res){
         try {
             let allFiles = req.files;
-            let isFileSaved = await storage.saveAllFiles('vehicleDoc', allFiles);
-            let response = await VehicleHelper.register_vehicle(req.body);
-            res.send(response);
+            let isFileSaved = await storage.saveAllFiles('vehicleDoc', allFiles, req.body);
+            if(isFileSaved.message) {
+                console.log("allfiles", isFileSaved)
+                let response = await VehicleHelper.register_vehicle(req.body, isFileSaved);
+                res.send(response);
+            }
+
         }catch(err){
             return false
         }

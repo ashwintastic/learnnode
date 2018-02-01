@@ -7,43 +7,33 @@ class FileUploader {
 
     async saveFileToDes(fileTosaveDir , file, iCount, storeInternal = true){
         if (storeInternal) {
-            this.saveImage(fileTosaveDir, file, iCount);
+            return this.saveImage(fileTosaveDir, file, iCount);
         }
     }
 
     async saveImage(fileTosaveDir,file, iCount=false){
-        let imgName = Date.now();
-        console.log("heheheheeh", file instanceof Array)
-        let filename = iCount
+        let filename = iCount;
         return new Promise((resolve, reject) => {
             fs.writeFile(`${fileTosaveDir}/${filename}`, file.buffer, 'binary',  function (err) {
                 if (err) reject(false);
-                else resolve({message: true, imgName: iCount})
+                else resolve({type: file.fieldname,  path: `${fileTosaveDir}/${filename}`})
             })
         })
     }
 
-    async saveAllFiles(path , files){
-        let promises = [];
+    async saveAllFiles(path , files, userInfo){
+        let imagePath = [];
         const allImages = files.length;
-        // check Or make directory exist
-        //let userId = req.header('token')
-        let dirStatus = await this.makeDir(GlobalConfig.imagePath+path,  '9145780834');
-        let fileTosaveDir = GlobalConfig.imagePath+path + '/'+ '9145780834';
+        let dirStatus = await this.makeDir(GlobalConfig.imagePath+path,  userInfo.vNumber);
+        let fileTosaveDir = GlobalConfig.imagePath+path + '/'+ userInfo.vNumber;
         if (dirStatus) {
             for (let i = 0; i < allImages; i++) {
-                promises.push(this.saveFileToDes(fileTosaveDir, files[i], i));
+                imagePath.push( await this.saveFileToDes(fileTosaveDir, files[i], i));
             }
-            Promise.all(promises)
-                .then(() => {
-                    return true
-                })
-                .catch((e) => {
-                    return false
-                });
+            return {message: true, path: imagePath}
         }
         else{
-            return{message: "Error with directory creation"}
+            return{message:true,  path: "Error with directory creation"}
         }
     }
 
