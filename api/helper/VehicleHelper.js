@@ -7,7 +7,7 @@ class VehicleHelper {
 
     async register_vehicle(vehicleinfo, docsPath){
         let vehicle = new Vehicle(vehicleinfo);
-        vehicle.vehicleDocs = docsPath.path;
+        vehicle.vehicleDocs = JSON.stringify(docsPath.path);;
         return vehicle.save().then(function(v){
             return v
         }).catch(function(e){
