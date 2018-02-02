@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"myCab.users"},{"v":2,"unique":true,"key":{"phone":1},"name":"phone_1","ns":"myCab.users","background":true}],"uuid":"775f0c344c8447ababf9291639505cfe"}

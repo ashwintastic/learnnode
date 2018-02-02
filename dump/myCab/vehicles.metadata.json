@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"myCab.vehicles"},{"v":2,"unique":true,"key":{"vNumber":1},"name":"vNumber_1","ns":"myCab.vehicles","background":true}],"uuid":"885628280a704ec68bae391afc10527a"}

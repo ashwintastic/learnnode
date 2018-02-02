@@ -6,6 +6,8 @@ class ReportGenerationController {
         res.send(report)
         
     }
+
+
 }
 
 export default new ReportGenerationController();
