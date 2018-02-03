@@ -1,0 +1,10 @@
+"subscribed_vehicle" {
+"_id": "5a740c88408437d7155bbdca",
+"name": "1st vegicle",
+"vNumber": "1stvenum",
+"maxCapacity": 34,
+"vehicleBelongsTo": "5a72d02739610a6211e67842",
+"vehicleDocs": [
+"[{\"type\":\"id\",\"path\":\"/home/ashwinik/Desktop/learn/nodejs/learnnode/storages/vehicleDoc/1stvenum/0\"},{\"type\":\"aadhar\",\"path\":\"/home/ashwinik/Desktop/learn/nodejs/learnnode/storages/vehicleDoc/1stvenum/1\"},{\"type\":\"pan\",\"path\":\"/home/ashwinik/Desktop/learn/nodejs/learnnode/storages/vehicleDoc/1stvenum/2\"}]"
+]
+}
