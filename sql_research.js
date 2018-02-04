@@ -41,9 +41,54 @@ db.users.aggregate([
 
 
 
+//----------------------
+db.passengers.aggregate(
+    {$addFields : { count : {$size :  {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}  }}},
+    {$sort : {count : 1 }}
+)
 
 
 
+// --------------------------------------
+
+db.passengers.aggregate(
+    {
+        $addFields : {
+            count : {
+                $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
+            }
+
+        }
+    },
+
+
+
+    {$sort : {count : -1 }},
+    {$project: {firstName: 1, lastName: 1, phone: 1,hasSubscribedAvehicle:1, count: 1, bla: 1} }
+
+)
+
+
+
+
+db.passengers.aggregate(
+    {
+        $addFields : {
+                         count : {
+                                    $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
+                                 },
+                         bla: {
+                             $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
+                              }
+                     }
+    },
+
+
+
+    {$sort : {count : -1 }},
+    {$project: {firstName: 1, lastName: 1, phone: 1,hasSubscribedAvehicle:1} }
+
+)
 
 
 
