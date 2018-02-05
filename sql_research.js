@@ -74,13 +74,13 @@ db.passengers.aggregate(
 db.passengers.aggregate(
     {
         $addFields : {
-                         count : {
-                                    $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
-                                 },
-                         bla: {
-                             $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
-                              }
-                     }
+            count : {
+                $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
+            },
+            bla: {
+                $size : {$ifNull: [{$objectToArray : "$hasSubscribedAvehicle"},[]]}
+            }
+        }
     },
 
 
@@ -129,6 +129,19 @@ db.passengers.aggregate([
 
 ])
 
+// ------group by ----------------
+
+db.getCollection('vehicles').aggregate(
+
+    {
+        $group: {
+            _id: "$vehicleBelongsTo",
+            total: { $sum: 1},
+            totalseat: {$sum: "$maxCapacity"}
+        }
+    },
+    {$sort: {total: -1}}
+)
 
 
 
