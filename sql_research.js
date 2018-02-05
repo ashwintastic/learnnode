@@ -92,6 +92,48 @@ db.passengers.aggregate(
 
 
 
+// display passender with embedded vehicles with drivers detailos
+
+db.passengers.aggregate([
+
+    {
+        $addFields : {
+            subscriptions: { "$objectToArray": "$hasSubscribedAvehicle" }
+        }
+    },
+
+
+
+    {
+        $lookup: {
+            from: "users",
+            localField: "subscriptions.v.vehicleBelongsTo",
+            foreignField: "_id",
+            as: "driver_details"
+        }
+    },
+
+    {
+        $project: {
+            "firstName": 1,
+            "lastName": 1,
+            "phone": 1,
+            "hasSubscribedAvehicle": 1,
+            "driver_details.firstName": 1,
+            "driver_details.lastName": 1,
+            "driver_details.email": 1,
+            "driver_details.phone": 1,
+            "driver_details._id": 1
+        }
+    }
+
+])
+
+
+
+
+
+
 
 
 
