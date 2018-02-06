@@ -143,7 +143,31 @@ db.getCollection('vehicles').aggregate(
     {$sort: {total: -1}}
 )
 
+// join from users to vehicles
 
+db.getCollection('users').aggregate(
+    {
+        $lookup:{
+            from: 'vehicles',
+            localField: '_id',
+            foreignField: 'vehicleBelongsTo',
+            as: 'mapping'
+        }
+    },
+
+    {
+        $addFields: {
+            countOfVehicle: {$size: "$mapping" }
+
+        }
+    },
+
+    {$sort: {countOfVehicle: -1}},
+    {$unwind: "$mapping"},
+    {$group: {_id: "$_id", drivers_vehicles: {$addToSet: "$mapping"}}}
+
+
+)
 
 
 

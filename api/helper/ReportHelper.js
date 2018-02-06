@@ -2,7 +2,7 @@ import User from '../model/UserModel';
 import Vehicle from '../model/VehicleModel';
 import Passenger from '../model/Passenger';
 import {LIMIT } from '../../config'; //5
-
+import {db} from '../../server';
 class ReportHelper {
 
     async vehicle_passenger_mapping(userInfo){
@@ -40,6 +40,45 @@ class ReportHelper {
     get_report_for_requested_driver(){
 
     }
+
+    all_drivers_passenger_subscription(){
+
+        db.collection('passengers').aggregate([
+
+            {
+                $addFields : {
+                    subscriptions: { "$objectToArray": "$hasSubscribedAvehicle" }
+                }
+            },
+
+
+
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "subscriptions.v.vehicleBelongsTo",
+                    foreignField: "_id",
+                    as: "driver_details"
+                }
+            },
+
+            {
+                $project: {
+                    "firstName": 1,
+                    "lastName": 1,
+                    "phone": 1,
+                    "hasSubscribedAvehicle": 1,
+                    "driver_details.firstName": 1,
+                    "driver_details.lastName": 1,
+                    "driver_details.email": 1,
+                    "driver_details.phone": 1,
+                    "driver_details._id": 1
+                }
+            }
+
+        ])
+    }
+
 }
 
 export default new ReportHelper();

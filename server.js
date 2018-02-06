@@ -9,7 +9,7 @@ import GlobalConfig from './api/config';
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(GlobalConfig.mongoDb, {
+export const db = mongoose.connect(GlobalConfig.mongoDb, {
   useMongoClient: true
   /* other options */
 });

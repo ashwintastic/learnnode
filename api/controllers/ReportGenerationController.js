@@ -7,6 +7,11 @@ class ReportGenerationController {
         
     }
 
+    async report_chart(){
+        let report = await ReportHelper.all_drivers_passenger_subscription()
+        res.send(report)
+    }
+
 
 }
 
