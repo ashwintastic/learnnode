@@ -2,7 +2,7 @@ import Vehicle from '../model/VehicleModel';
 import User from '../model/UserModel';
 import Passenger from '../model/Passenger';
 import auth from '../utils/authMiddleWare';
-
+var mongoose = require('mongoose');
 class SubcriptionHelper{
 
     async passenger_subscribes_vehicle(passengerInfo){
@@ -15,7 +15,9 @@ class SubcriptionHelper{
             passenger.hasSubscribedAvehicle = {}
         }
         let key = passengerInfo.subscribed_vehicle._id;
-        passenger.hasSubscribedAvehicle[key] =  passengerInfo.subscribed_vehicle;
+        passengerInfo.subscribed_vehicle.vehicleBelongsTo = mongoose.Types.ObjectId(passengerInfo.subscribed_vehicle.vehicleBelongsTo);
+        passengerInfo.subscribed_vehicle._id = mongoose.Types.ObjectId(passengerInfo.subscribed_vehicle._id);
+        passenger.hasSubscribedAvehicle[mongoose.Types.ObjectId(key)] =  passengerInfo.subscribed_vehicle;
         return Passenger.update(query, {hasSubscribedAvehicle: passenger.hasSubscribedAvehicle }, {upsert:true}).then( () => {
             let subscribedVehicle = passengerInfo.subscribed_vehicle;
             return {message: `You are subcribed to ${subscribedVehicle.name} number is ${subscribedVehicle.vNumber}`}
