@@ -170,6 +170,27 @@ db.getCollection('users').aggregate(
 )
 
 
+// list all drivers who has no vehicles
+
+db.users.aggregate(
+    {
+        $lookup: {
+            from: 'vehicles',
+            localField: '_id',
+            foreignField: 'vehicleBelongsTo',
+            as: 'nulleDrivers'
+        }
+    },
+
+    {
+        $addFields: {countVehicle: {$size: "$nulleDrivers" } }
+    },
+    { $match: { "countVehicle" : {$eq: 0}} }
+
+)
+
+
+
 
 
 
